@@ -1,15 +1,16 @@
 import requests
 import smtplib
+import os
 
-my_email = "favourhenrytest@gmail.com"
-password = "htglcwuknrvflocw"
-r_email =  "favourhenrytest@yahoo.com"
+my_email = os.environ.get("EMAIL_ADDRESS")
+password = os.environ.get("EMAIL_PASSWORD")
+r_email =  os.environ.get("RECEIVERS_EMAIL")
 
 api_endpoint = "http://api.openweathermap.org/data/2.5/forecast"
 api_key = "b6427eaaf03fb6f4fae376ab81b6e903"
 parameters = {
-    "lat": 44.389339,
-    "lon": -79.685516,
+    "lat": 9.081999 ,
+    "lon": 8.675277,
     "appid": api_key,
     "cnt": 4,
 }
@@ -22,7 +23,6 @@ response = requests.get(url= api_endpoint, params= parameters)
 response.raise_for_status()
 weather_data = response.json()
 
-# print(weather_data)
 
 codes = []
 will_rain = False
@@ -41,5 +41,3 @@ if will_rain:
 
 
 
-# print(codes)
-# print("Bring Umbrella")
